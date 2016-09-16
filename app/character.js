@@ -13,12 +13,261 @@ const character = {
     Level: 5,
     Race: 'Half-Orc',
     Gender: 'Male',
-    AvatarSrc: 'http://www.tribality.com/wp-content/uploads/2015/01/half-orc.jpeg',
     ProficiencyBonus: 3,
     Initiative: 3,
     Inspiration: false,
-    Ammunition: null,
+    Exhaustion: 0,
     Background: 'Gladiator',
+    AvatarSrc: 'http://www.tribality.com/wp-content/uploads/2015/01/half-orc.jpeg',
+    // WildShapes: {
+    //     Usages: {
+    //         Max: 2,
+    //         Remaining: 1
+    //     },
+    //     Duration: 5,
+    //     Limitations: 'No Swimming or Flying',
+    //     Shapes: [
+    //         {
+    //             Name: 'Brown Bear',
+    //             Type: 'Beast',
+    //             Size: 'Large',
+    //             Initiative: 0,
+    //             AC: 11,
+    //             CR: 1,
+    //             ProficiencyBonus: 2,
+    //             PassivePerception: 16,
+    //             HitPoints: {
+    //                 Max: 34,
+    //                 Current: 34,
+    //                 Temp: 0,
+    //                 HitDice: '4d10'
+    //             },
+    //             Speed: {
+    //                 Walk: 40,
+    //                 Climb: 30
+    //             },
+    //             AbilityScores: {
+    //                 STR: {
+    //                     Score: 20,
+    //                     Modifier: 5,
+    //                     Save: 8,
+    //                     Proficiency: true
+    //                 },        
+    //                 DEX: {
+    //                     Score: 16,
+    //                     Modifier: 3,
+    //                     Save: 3,
+    //                     Proficiency: false
+    //                 },
+    //                 CON: {
+    //                     Score: 18,
+    //                     Modifier: 4,
+    //                     Save: 7,
+    //                     Proficiency: true
+    //                 },        
+    //                 INT: {
+    //                     Score: 8,
+    //                     Modifier: -1,
+    //                     Save: -1,
+    //                     Proficiency: false
+    //                 },        
+    //                 WIS: {
+    //                     Score: 15,
+    //                     Modifier: 2,
+    //                     Save: 2,
+    //                     Proficiency: false
+    //                 },
+    //                 CHA: {
+    //                     Score: 14,
+    //                     Modifier: 2,
+    //                     Save: 2,
+    //                     Proficiency: false
+    //                 }
+    //             },
+    //             Skills: {
+    //                 STR: {
+    //                     Athletics: {
+    //                         Bonus: 8,
+    //                         Advantage: 0,
+    //                         Proficiency: true,
+    //                         Expertise: false
+    //                     }
+    //                 },
+    //                 DEX: {
+    //                     Acrobatics: {
+    //                         Bonus: 6,
+    //                         Advantage: 0,
+    //                         Proficiency: true,
+    //                         Expertise: false
+    //                     },
+    //                     SleightOfHand: {
+    //                         Bonus: 3,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     Stealth: {
+    //                         Bonus: 3,
+    //                         Advantage: -1,
+    //                         Proficiency: true,
+    //                         Expertise: false
+    //                     }
+    //                 },
+    //                 CON: {},
+    //                 INT: {
+    //                     Arcana: {
+    //                         Bonus: -1,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     History: {
+    //                         Bonus: -1,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     Investigation: {
+    //                         Bonus: -1,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     Nature: {
+    //                         Bonus: -1,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     Religion: {
+    //                         Bonus: -1,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     }
+    //                 },
+    //                 WIS: {
+    //                     AnimalHandling: {
+    //                         Bonus: 2,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     Insight: {
+    //                         Bonus: 2,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     Medicine: {
+    //                         Bonus: 2,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     Perception: {
+    //                         Bonus: 5,
+    //                         Advantage: 0,
+    //                         Proficiency: true,
+    //                         Expertise: false
+    //                     },
+    //                     Survival: {
+    //                         Bonus: 2,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     }
+    //                 },
+    //                 CHA: {
+    //                     Deception: {
+    //                         Bonus: 2,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     },
+    //                     Intimidation: {
+    //                         Bonus: 5,
+    //                         Advantage: 0,
+    //                         Proficiency: true,
+    //                         Expertise: false
+    //                     },
+    //                     Performance: {
+    //                         Bonus: 5,
+    //                         Advantage: 0,
+    //                         Proficiency: true,
+    //                         Expertise: false
+    //                     },
+    //                     Persuasion: {
+    //                         Bonus: 2,
+    //                         Advantage: 0,
+    //                         Proficiency: false,
+    //                         Expertise: false
+    //                     }
+    //                 }
+    //             },
+    //             TraitsFeats: [
+    //                 {
+    //                     Name: 'Keen Smell',
+    //                     Description: 'The bear has advantage on WIS(Perception) checks that rely on smell.'
+    //                 }
+    //             ],
+    //             Attacks: [
+    //                 {
+    //                     Weapon: 'Bite',
+    //                     Keywords: null,
+    //                     Description: 'One bite and one claw attack as an attack action',
+    //                     Proficiency: true,
+    //                     Range: 'Melee',
+    //                     ToHit: 5,
+    //                     Damage: '1d8+4',
+    //                     Type: 'Piercing'
+    //                 },
+    //                 {
+    //                     Weapon: 'Claw',
+    //                     Keywords: null,
+    //                     Description: 'One bite and one claw attack as an attack action',
+    //                     Proficiency: true,
+    //                     Range: 'Melee',
+    //                     ToHit: 5,
+    //                     Damage: '2d6+4',
+    //                     Type: 'Slashing'
+    //                 }
+    //             ]
+    //         }
+    //     ]
+    // },
+    // Ammunition: [
+    //     {
+    //         Type: 'Darts',
+    //         Quantity: {
+    //             Total: 20,
+    //             Remaining: 12
+    //         }
+    //     }
+    // ],
+    WildShapes: null,
+    Ammunition: null,
+    Spells: null,
+    Organization: {
+        Name: null,
+        ImageSrc: null
+    },
+    Conditions: {
+        Blinded: false,
+        Charmed: false,
+        Deafened: false,
+        Frightened: false,
+        Grappled: false,
+        Incapacitated: false,
+        Invisible: false,
+        Paralyzed: false,
+        Petrified: false,
+        Poisoned: false,
+        Prone: false,
+        Restrained: false,
+        Stunned: false,
+        Unconscious: false
+    },
     Experience: {
         Current: 6500,
         Next: 14000
@@ -33,7 +282,11 @@ const character = {
         }
     ],
     Speed: {
-        Normal: 40,
+        Walk: 40,
+        Fly: null,
+        Burrow: null,
+        Swim: null,
+        Climb: null,
         Encumbered: {
             Speed: 30,
             Range: {
@@ -179,7 +432,15 @@ const character = {
         ],
         Flaws: [
             'I\'ll do anything to win fame and renown.'
-        ]
+        ],
+        Allies: [
+            'blah blah allies'
+        ],
+        Enemies: [
+            'asdfjkolasdfjklasdfjklfasd'
+        ],
+        CharacterHistory: 'blah blah blah history',
+        Appearance: 'asdfjklasdfjklasdfjklasdfjklasdf'
     },
     Features: {
         Racial: [
@@ -244,7 +505,12 @@ const character = {
         Attacks: [
             {
                 Weapon: 'Glaive',
-                Description: 'Heavy, Reach, Two-Handed',
+                Keywords: [
+                    'Heavy', 
+                    'Reach',
+                    'Two-Handed'
+                ],
+                Description: null,
                 Proficiency: true,
                 Range: 'Melee',
                 ToHit: 8,
@@ -253,7 +519,11 @@ const character = {
             },
             {
                 Weapon: '+1 Berserker\'s Morningstar',
-                Description: 'Heavy, Two-Handed',                
+                Keywords: [
+                    'Heavy',
+                    'Two-Handed'
+                ],      
+                Description: null,          
                 Proficiency: true,
                 Range: 'Melee',
                 ToHit: 9,
@@ -489,7 +759,38 @@ const character = {
             Proficiency: false,
             Expertise: false
         }
-    }
+    },
+    // Spells: {
+    //     Slots: [
+    //         {
+    //             Max: 3,
+    //             Remaining: 3
+    //         },
+    //         {
+    //             Max: 3,
+    //             Remaining: 3
+    //         },
+    //         {
+    //             Max: 2,
+    //             Remaining: 2
+    //         },
+    //         {
+    //             Max: 2,
+    //             Remaining: 0
+    //         },
+    //         {
+    //             Max: 2,
+    //             Remaining: 1
+    //         },
+    //         {
+    //             Max: 1,
+    //             Remaining: 0
+    //         },
+    //         null,
+    //         null,
+    //         null
+    //     ]
+    // }
 };
 
 export default character;
