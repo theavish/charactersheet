@@ -4,7 +4,7 @@ export default class CharacterData extends Component {
     render() {
         return (
             <div>
-                <img src={this.props.user.avatarSrc} />
+                <img />
             </div>
         );
     }

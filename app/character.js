@@ -1,35 +1,37 @@
 const character = {
     Name: 'Adohand the Gatorslayer',
     Player: 'Avi',
-    Experience: {
-        Current: 6500,
-        Next: 14000
-    },
     Age: 50,
     Hair: 'Black',
     Eyes: 'Red',
     Skin: 'Greenish',
     Height: '6ft',
     Weight: '220lbs',
-    Lifestyle: {
-        Style: 'Modest',
-        Price: 1
-    },
     Size: 'Medium',
     Alignment: 'Chaotic Neutral',
     Faith: null,
     Level: 5,
-    Classes: [
-        {
-            Berserker: 5
-        }
-    ],
     Race: 'Half-Orc',
     Gender: 'Male',
     AvatarSrc: 'http://www.tribality.com/wp-content/uploads/2015/01/half-orc.jpeg',
     ProficiencyBonus: 3,
     Initiative: 3,
     Inspiration: false,
+    Ammunition: null,
+    Background: 'Gladiator',
+    Experience: {
+        Current: 6500,
+        Next: 14000
+    },
+    Lifestyle: {
+        Style: 'Modest',
+        Price: 1
+    },
+    Classes: [
+        {
+            Berserker: 5
+        }
+    ],
     Speed: {
         Normal: 40,
         Encumbered: {
@@ -54,8 +56,6 @@ const character = {
             }
         }
     },
-    Ammunition: null,
-    Background: 'Gladiator',
     Inventory: {
         TotalWeight: 200,
         MagicItems: [
