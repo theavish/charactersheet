@@ -56,13 +56,9 @@
 
 	var _CharacterSheet2 = _interopRequireDefault(_CharacterSheet);
 
-	var _character = __webpack_require__(169);
-
-	var _character2 = _interopRequireDefault(_character);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	(0, _reactDom.render)(_react2.default.createElement(_CharacterSheet2.default, { character: _character2.default }), document.getElementById('app'));
+	(0, _reactDom.render)(_react2.default.createElement(_CharacterSheet2.default, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -19768,6 +19764,10 @@
 
 	var _Scrollbar2 = _interopRequireDefault(_Scrollbar);
 
+	var _character = __webpack_require__(169);
+
+	var _character2 = _interopRequireDefault(_character);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19791,9 +19791,11 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_CharacterInfo2.default, null),
+	                _react2.default.createElement(_CharacterInfo2.default, {
+	                    character: _character2.default }),
 	                _react2.default.createElement(_Scrollbar2.default, null),
-	                _react2.default.createElement(_Subsections2.default, null)
+	                _react2.default.createElement(_Subsections2.default, {
+	                    character: _character2.default })
 	            );
 	        }
 	    }]);
@@ -19858,10 +19860,26 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_CharacterData2.default, null),
-	                _react2.default.createElement(_HitPoints2.default, null),
-	                _react2.default.createElement(_QuickInfo2.default, null),
-	                _react2.default.createElement(_Actions2.default, null)
+	                _react2.default.createElement(_CharacterData2.default, {
+	                    name: this.props.character.Name,
+	                    avatar: this.props.character.AvatarSrc,
+	                    classes: this.props.character.Classes,
+	                    gender: this.props.character.Gender,
+	                    level: this.props.character.Level,
+	                    exp: this.props.character.Experience,
+	                    race: this.props.character.Race }),
+	                _react2.default.createElement(_HitPoints2.default, {
+	                    hp: this.props.character.HitPoints }),
+	                _react2.default.createElement(_QuickInfo2.default, {
+	                    ac: this.props.character.Defense.ArmorClass,
+	                    initiative: this.props.character.Initiative,
+	                    speed: this.props.character.Speed,
+	                    passivePerception: this.props.character.Senses.PassivePerception,
+	                    profBonus: this.props.character.ProficiencyBonus }),
+	                _react2.default.createElement(_Actions2.default, {
+	                    inspiration: this.props.character.Inspiration,
+	                    deathSaves: this.props.character.DeathSaves,
+	                    hitDice: this.props.character.HitPoints.HitDice })
 	            );
 	        }
 	    }]);
@@ -19905,12 +19923,48 @@
 	    }
 
 	    _createClass(CharacterData, [{
+	        key: 'buildClassList',
+	        value: function buildClassList(classes) {
+	            var list = classes.map(function (cl, idx) {
+	                var curClass = Object.keys(cl)[0];
+	                var levels = cl[curClass];
+	                return curClass + ' ' + levels;
+	            });
+	            return list.join(' \/ ');
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement('img', null)
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    this.props.name
+	                ),
+	                _react2.default.createElement('img', { className: 'character-avatar', height: '50px', src: this.props.avatar }),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        this.props.gender,
+	                        ' '
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        this.props.race,
+	                        ' '
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        this.buildClassList(this.props.classes)
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -19959,7 +20013,26 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                'hit points'
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    this.props.hp.Current
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    '/'
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    this.props.hp.Max
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'tempHP', style: { background: '#000', color: '#fff' } },
+	                    this.props.hp.Temp
+	                )
 	            );
 	        }
 	    }]);
@@ -19973,7 +20046,7 @@
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -20003,12 +20076,82 @@
 	    }
 
 	    _createClass(QuickInfo, [{
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
+	                "div",
 	                null,
-	                'quick info'
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "armor-class" },
+	                    _react2.default.createElement(
+	                        "h3",
+	                        null,
+	                        "Armor Class"
+	                    ),
+	                    _react2.default.createElement(
+	                        "span",
+	                        null,
+	                        this.props.ac.Total
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "initiative" },
+	                    _react2.default.createElement(
+	                        "h3",
+	                        null,
+	                        "Initiative"
+	                    ),
+	                    _react2.default.createElement(
+	                        "span",
+	                        null,
+	                        this.props.initiative >= 0 ? "+" + this.props.initiative : this.props.initiative
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "speed" },
+	                    _react2.default.createElement(
+	                        "h3",
+	                        null,
+	                        "Speed"
+	                    ),
+	                    _react2.default.createElement(
+	                        "span",
+	                        null,
+	                        this.props.speed.Walk,
+	                        "ft"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "passive-perception" },
+	                    _react2.default.createElement(
+	                        "h3",
+	                        null,
+	                        "Passive Perception"
+	                    ),
+	                    _react2.default.createElement(
+	                        "span",
+	                        null,
+	                        this.props.passivePerception
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "proficiency-bonus" },
+	                    _react2.default.createElement(
+	                        "h3",
+	                        null,
+	                        "Proficiency Bonus"
+	                    ),
+	                    _react2.default.createElement(
+	                        "span",
+	                        null,
+	                        this.props.profBonus >= 0 ? "+" + this.props.profBonus : this.props.profBonus
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -20022,7 +20165,7 @@
 /* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -20052,12 +20195,31 @@
 	    }
 
 	    _createClass(Actions, [{
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
+	                "div",
 	                null,
-	                'actions'
+	                _react2.default.createElement(
+	                    "button",
+	                    { className: "button" },
+	                    "Inspiration"
+	                ),
+	                _react2.default.createElement(
+	                    "button",
+	                    { className: "button" },
+	                    "Death Saves"
+	                ),
+	                _react2.default.createElement(
+	                    "button",
+	                    { className: "button" },
+	                    "Rest"
+	                ),
+	                _react2.default.createElement(
+	                    "button",
+	                    { className: "button" },
+	                    "Hit Dice"
+	                )
 	            );
 	        }
 	    }]);
@@ -20114,8 +20276,15 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_AbilityScores2.default, null),
-	                _react2.default.createElement(_Skills2.default, null)
+	                _react2.default.createElement(_AbilityScores2.default, {
+	                    str: this.props.character.AbilityScores.STR,
+	                    dex: this.props.character.AbilityScores.DEX,
+	                    con: this.props.character.AbilityScores.CON,
+	                    int: this.props.character.AbilityScores.INT,
+	                    wis: this.props.character.AbilityScores.WIS,
+	                    cha: this.props.character.AbilityScores.CHA }),
+	                _react2.default.createElement(_Skills2.default, {
+	                    skills: this.props.character.Skills })
 	            );
 	        }
 	    }]);
@@ -20159,12 +20328,55 @@
 	    }
 
 	    _createClass(AbilityScores, [{
+	        key: 'scoresChart',
+	        value: function scoresChart(score) {
+	            return _react2.default.createElement(
+	                'tr',
+	                { className: score.Label.toLowerCase() + '-score' },
+	                _react2.default.createElement(
+	                    'th',
+	                    null,
+	                    score.Label
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    null,
+	                    score.Score
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    null,
+	                    'MOD ',
+	                    score.Modifier >= 0 ? '+' + score.Modifier : score.Modifier
+	                ),
+	                _react2.default.createElement(
+	                    'td',
+	                    null,
+	                    'SAVE ',
+	                    score.Save >= 0 ? '+' + score.Save : score.Save
+	                )
+	            );
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                'ability scores'
+	                _react2.default.createElement(
+	                    'table',
+	                    null,
+	                    _react2.default.createElement(
+	                        'tbody',
+	                        null,
+	                        this.scoresChart(this.props.str),
+	                        this.scoresChart(this.props.dex),
+	                        this.scoresChart(this.props.con),
+	                        this.scoresChart(this.props.int),
+	                        this.scoresChart(this.props.wis),
+	                        this.scoresChart(this.props.cha)
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -20262,7 +20474,46 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                'scrollbar'
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Abilities'
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Skills'
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Attacks'
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Spells'
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Limited Use'
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Equipment'
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Features'
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    null,
+	                    'Description'
+	                )
 	            );
 	        }
 	    }]);
@@ -20296,12 +20547,261 @@
 	    Level: 5,
 	    Race: 'Half-Orc',
 	    Gender: 'Male',
-	    AvatarSrc: 'http://www.tribality.com/wp-content/uploads/2015/01/half-orc.jpeg',
 	    ProficiencyBonus: 3,
 	    Initiative: 3,
 	    Inspiration: false,
-	    Ammunition: null,
+	    Exhaustion: 0,
 	    Background: 'Gladiator',
+	    AvatarSrc: 'http://www.tribality.com/wp-content/uploads/2015/01/half-orc.jpeg',
+	    // WildShapes: {
+	    //     Usages: {
+	    //         Max: 2,
+	    //         Remaining: 1
+	    //     },
+	    //     Duration: 5,
+	    //     Limitations: 'No Swimming or Flying',
+	    //     Shapes: [
+	    //         {
+	    //             Name: 'Brown Bear',
+	    //             Type: 'Beast',
+	    //             Size: 'Large',
+	    //             Initiative: 0,
+	    //             AC: 11,
+	    //             CR: 1,
+	    //             ProficiencyBonus: 2,
+	    //             PassivePerception: 16,
+	    //             HitPoints: {
+	    //                 Max: 34,
+	    //                 Current: 34,
+	    //                 Temp: 0,
+	    //                 HitDice: '4d10'
+	    //             },
+	    //             Speed: {
+	    //                 Walk: 40,
+	    //                 Climb: 30
+	    //             },
+	    //             AbilityScores: {
+	    //                 STR: {
+	    //                     Score: 20,
+	    //                     Modifier: 5,
+	    //                     Save: 8,
+	    //                     Proficiency: true
+	    //                 },        
+	    //                 DEX: {
+	    //                     Score: 16,
+	    //                     Modifier: 3,
+	    //                     Save: 3,
+	    //                     Proficiency: false
+	    //                 },
+	    //                 CON: {
+	    //                     Score: 18,
+	    //                     Modifier: 4,
+	    //                     Save: 7,
+	    //                     Proficiency: true
+	    //                 },        
+	    //                 INT: {
+	    //                     Score: 8,
+	    //                     Modifier: -1,
+	    //                     Save: -1,
+	    //                     Proficiency: false
+	    //                 },        
+	    //                 WIS: {
+	    //                     Score: 15,
+	    //                     Modifier: 2,
+	    //                     Save: 2,
+	    //                     Proficiency: false
+	    //                 },
+	    //                 CHA: {
+	    //                     Score: 14,
+	    //                     Modifier: 2,
+	    //                     Save: 2,
+	    //                     Proficiency: false
+	    //                 }
+	    //             },
+	    //             Skills: {
+	    //                 STR: {
+	    //                     Athletics: {
+	    //                         Bonus: 8,
+	    //                         Advantage: 0,
+	    //                         Proficiency: true,
+	    //                         Expertise: false
+	    //                     }
+	    //                 },
+	    //                 DEX: {
+	    //                     Acrobatics: {
+	    //                         Bonus: 6,
+	    //                         Advantage: 0,
+	    //                         Proficiency: true,
+	    //                         Expertise: false
+	    //                     },
+	    //                     SleightOfHand: {
+	    //                         Bonus: 3,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Stealth: {
+	    //                         Bonus: 3,
+	    //                         Advantage: -1,
+	    //                         Proficiency: true,
+	    //                         Expertise: false
+	    //                     }
+	    //                 },
+	    //                 CON: {},
+	    //                 INT: {
+	    //                     Arcana: {
+	    //                         Bonus: -1,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     History: {
+	    //                         Bonus: -1,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Investigation: {
+	    //                         Bonus: -1,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Nature: {
+	    //                         Bonus: -1,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Religion: {
+	    //                         Bonus: -1,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     }
+	    //                 },
+	    //                 WIS: {
+	    //                     AnimalHandling: {
+	    //                         Bonus: 2,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Insight: {
+	    //                         Bonus: 2,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Medicine: {
+	    //                         Bonus: 2,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Perception: {
+	    //                         Bonus: 5,
+	    //                         Advantage: 0,
+	    //                         Proficiency: true,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Survival: {
+	    //                         Bonus: 2,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     }
+	    //                 },
+	    //                 CHA: {
+	    //                     Deception: {
+	    //                         Bonus: 2,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Intimidation: {
+	    //                         Bonus: 5,
+	    //                         Advantage: 0,
+	    //                         Proficiency: true,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Performance: {
+	    //                         Bonus: 5,
+	    //                         Advantage: 0,
+	    //                         Proficiency: true,
+	    //                         Expertise: false
+	    //                     },
+	    //                     Persuasion: {
+	    //                         Bonus: 2,
+	    //                         Advantage: 0,
+	    //                         Proficiency: false,
+	    //                         Expertise: false
+	    //                     }
+	    //                 }
+	    //             },
+	    //             TraitsFeats: [
+	    //                 {
+	    //                     Name: 'Keen Smell',
+	    //                     Description: 'The bear has advantage on WIS(Perception) checks that rely on smell.'
+	    //                 }
+	    //             ],
+	    //             Attacks: [
+	    //                 {
+	    //                     Weapon: 'Bite',
+	    //                     Keywords: null,
+	    //                     Description: 'One bite and one claw attack as an attack action',
+	    //                     Proficiency: true,
+	    //                     Range: 'Melee',
+	    //                     ToHit: 5,
+	    //                     Damage: '1d8+4',
+	    //                     Type: 'Piercing'
+	    //                 },
+	    //                 {
+	    //                     Weapon: 'Claw',
+	    //                     Keywords: null,
+	    //                     Description: 'One bite and one claw attack as an attack action',
+	    //                     Proficiency: true,
+	    //                     Range: 'Melee',
+	    //                     ToHit: 5,
+	    //                     Damage: '2d6+4',
+	    //                     Type: 'Slashing'
+	    //                 }
+	    //             ]
+	    //         }
+	    //     ]
+	    // },
+	    // Ammunition: [
+	    //     {
+	    //         Type: 'Darts',
+	    //         Quantity: {
+	    //             Total: 20,
+	    //             Remaining: 12
+	    //         }
+	    //     }
+	    // ],
+	    WildShapes: null,
+	    Ammunition: null,
+	    Spells: null,
+	    Organization: {
+	        Name: null,
+	        ImageSrc: null
+	    },
+	    Conditions: {
+	        Blinded: false,
+	        Charmed: false,
+	        Deafened: false,
+	        Frightened: false,
+	        Grappled: false,
+	        Incapacitated: false,
+	        Invisible: false,
+	        Paralyzed: false,
+	        Petrified: false,
+	        Poisoned: false,
+	        Prone: false,
+	        Restrained: false,
+	        Stunned: false,
+	        Unconscious: false
+	    },
 	    Experience: {
 	        Current: 6500,
 	        Next: 14000
@@ -20314,7 +20814,11 @@
 	        Berserker: 5
 	    }],
 	    Speed: {
-	        Normal: 40,
+	        Walk: 40,
+	        Fly: null,
+	        Burrow: null,
+	        Swim: null,
+	        Climb: null,
 	        Encumbered: {
 	            Speed: 30,
 	            Range: {
@@ -20434,7 +20938,11 @@
 	        PersonalityTraits: ['I love a good insult, even one directed at me.'],
 	        Ideals: ['Creativity: The world is in need of new ideas and bold action. (chaotic)'],
 	        Bonds: ['I idolize a hero of the old tales and measure my deeds against that person.'],
-	        Flaws: ['I\'ll do anything to win fame and renown.']
+	        Flaws: ['I\'ll do anything to win fame and renown.'],
+	        Allies: ['blah blah allies'],
+	        Enemies: ['asdfjkolasdfjklasdfjklfasd'],
+	        CharacterHistory: 'blah blah blah history',
+	        Appearance: 'asdfjklasdfjklasdfjklasdfjklasdf'
 	    },
 	    Features: {
 	        Racial: [{
@@ -20486,7 +20994,8 @@
 	        PerAction: 2,
 	        Attacks: [{
 	            Weapon: 'Glaive',
-	            Description: 'Heavy, Reach, Two-Handed',
+	            Keywords: ['Heavy', 'Reach', 'Two-Handed'],
+	            Description: null,
 	            Proficiency: true,
 	            Range: 'Melee',
 	            ToHit: 8,
@@ -20494,7 +21003,8 @@
 	            Type: 'Slashing'
 	        }, {
 	            Weapon: '+1 Berserker\'s Morningstar',
-	            Description: 'Heavy, Two-Handed',
+	            Keywords: ['Heavy', 'Two-Handed'],
+	            Description: null,
 	            Proficiency: true,
 	            Range: 'Melee',
 	            ToHit: 9,
@@ -20556,37 +21066,43 @@
 	            Score: 20,
 	            Modifier: 5,
 	            Save: 8,
-	            Proficiency: true
+	            Proficiency: true,
+	            Label: 'Strength'
 	        },
 	        DEX: {
 	            Score: 16,
 	            Modifier: 3,
 	            Save: 3,
-	            Proficiency: false
+	            Proficiency: false,
+	            Label: 'Dexterity'
 	        },
 	        CON: {
 	            Score: 18,
 	            Modifier: 4,
 	            Save: 7,
-	            Proficiency: true
+	            Proficiency: true,
+	            Label: 'Constitution'
 	        },
 	        INT: {
 	            Score: 8,
 	            Modifier: -1,
 	            Save: -1,
-	            Proficiency: false
+	            Proficiency: false,
+	            Label: 'Intelligence'
 	        },
 	        WIS: {
 	            Score: 15,
 	            Modifier: 2,
 	            Save: 2,
-	            Proficiency: false
+	            Proficiency: false,
+	            Label: 'Wisdom'
 	        },
 	        CHA: {
 	            Score: 14,
 	            Modifier: 2,
 	            Save: 2,
-	            Proficiency: false
+	            Proficiency: false,
+	            Label: 'Charisma'
 	        }
 	    },
 	    Skills: {

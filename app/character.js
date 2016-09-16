@@ -600,37 +600,43 @@ const character = {
             Score: 20,
             Modifier: 5,
             Save: 8,
-            Proficiency: true
+            Proficiency: true,
+            Label: 'Strength'
         },        
         DEX: {
             Score: 16,
             Modifier: 3,
             Save: 3,
-            Proficiency: false
+            Proficiency: false,
+            Label: 'Dexterity'
         },
         CON: {
             Score: 18,
             Modifier: 4,
             Save: 7,
-            Proficiency: true
+            Proficiency: true,
+            Label: 'Constitution'
         },        
         INT: {
             Score: 8,
             Modifier: -1,
             Save: -1,
-            Proficiency: false
+            Proficiency: false,
+            Label: 'Intelligence'
         },        
         WIS: {
             Score: 15,
             Modifier: 2,
             Save: 2,
-            Proficiency: false
+            Proficiency: false,
+            Label: 'Wisdom'
         },
         CHA: {
             Score: 14,
             Modifier: 2,
             Save: 2,
-            Proficiency: false
+            Proficiency: false,
+            Label: 'Charisma'
         }
     },
     Skills: {
