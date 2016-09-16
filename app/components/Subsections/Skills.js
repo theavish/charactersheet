@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class CharacterData extends Component {
+export default class Skills extends Component {
     render() {
         return (
             <div>
-                <img src={this.props.user.avatarSrc} />
+                Skills
             </div>
         );
     }
